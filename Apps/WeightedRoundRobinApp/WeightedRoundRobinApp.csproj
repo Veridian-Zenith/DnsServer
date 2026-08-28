@@ -15,6 +15,7 @@
 		<Description>Allows creating APP records in primary and forwarder zones that can return A or AAAA records, or CNAME record using weighted round-robin load balancing.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

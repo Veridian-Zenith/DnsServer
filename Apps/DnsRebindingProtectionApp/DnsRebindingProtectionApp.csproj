@@ -15,6 +15,7 @@
 		<Description>Protects from DNS rebinding attacks using configured private domains and networks.\n\nWarning! The app will remove private IP addresses from response for domain names not hosted locally.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

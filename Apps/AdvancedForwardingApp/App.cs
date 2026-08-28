@@ -577,9 +577,6 @@ namespace AdvancedForwarding
                         if (configFileLastModified > _configFileLastModified)
                         {
                             ReloadUpstreamsFile();
-
-                            //force GC collection to remove old cache data from memory quickly
-                            GC.Collect();
                         }
                     }
                     catch (Exception ex)

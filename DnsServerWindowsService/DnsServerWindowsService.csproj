@@ -18,6 +18,7 @@
 		<RepositoryUrl>https://github.com/TechnitiumSoftware/DnsServer</RepositoryUrl>
 		<PackageId>DnsServerWindowsService</PackageId>
 		<Nullable>enable</Nullable>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

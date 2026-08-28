@@ -15,6 +15,7 @@
 		<Description>Overrides NX Domain response with custom A/AAAA record response for configured domain names.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

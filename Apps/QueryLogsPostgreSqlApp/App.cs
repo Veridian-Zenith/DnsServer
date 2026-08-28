@@ -254,7 +254,7 @@ namespace QueryLogsPostgreSql
 
                             NpgsqlParameter paramServer = command.Parameters.Add("@server" + i, NpgsqlDbType.Varchar);
                             NpgsqlParameter paramTimestamp = command.Parameters.Add("@timestamp" + i, NpgsqlDbType.TimestampTz);
-                            NpgsqlParameter paramClientIp = command.Parameters.Add("@client_ip" + i, NpgsqlDbType.Varchar);
+                            NpgsqlParameter paramClientIp = command.Parameters.Add("@client_ip" + i, NpgsqlDbType.Inet);
                             NpgsqlParameter paramProtocol = command.Parameters.Add("@protocol" + i, NpgsqlDbType.Smallint);
                             NpgsqlParameter paramResponseType = command.Parameters.Add("@response_type" + i, NpgsqlDbType.Smallint);
                             NpgsqlParameter paramResponseRtt = command.Parameters.Add("@response_rtt" + i, NpgsqlDbType.Double);
@@ -266,7 +266,7 @@ namespace QueryLogsPostgreSql
 
                             paramServer.Value = _dnsServer?.ServerDomain;
                             paramTimestamp.Value = log.Timestamp;
-                            paramClientIp.Value = log.RemoteEP.Address.ToString();
+                            paramClientIp.Value = log.RemoteEP.Address;
                             paramProtocol.Value = (byte)log.Protocol;
 
                             DnsServerResponseType responseType;
@@ -385,22 +385,22 @@ namespace QueryLogsPostgreSql
                             await using (NpgsqlCommand command = connection.CreateCommand())
                             {
                                 command.CommandText = @$"
-CREATE TABLE IF NOT EXISTS dns_logs
-(
-    dlid SERIAL PRIMARY KEY,
-    server varchar(255),
-    timestamp timestamp with time zone NOT NULL,
-    client_ip VARCHAR(39) NOT NULL,
-    protocol SMALLINT NOT NULL,
-    response_type SMALLINT NOT NULL,
-    response_rtt REAL,
-    rcode SMALLINT NOT NULL,
-    qname VARCHAR(255),
-    qtype INTEGER,
-    qclass SMALLINT,
-    answer VARCHAR(4000)
-);
-";
+ CREATE TABLE IF NOT EXISTS dns_logs
+ (
+     dlid bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+     server varchar(255),
+     timestamp timestamp with time zone NOT NULL,
+     client_ip VARCHAR(39) NOT NULL,
+     protocol SMALLINT NOT NULL,
+     response_type SMALLINT NOT NULL,
+     response_rtt REAL,
+     rcode SMALLINT NOT NULL,
+     qname VARCHAR(255),
+     qtype INTEGER,
+     qclass SMALLINT,
+     answer VARCHAR(4000)
+ );
+ ";
 
                                 await command.ExecuteNonQueryAsync();
                             }
@@ -818,7 +818,7 @@ LIMIT @limit OFFSET @offset";
                         command.Parameters.AddWithValue("@end", end);
 
                     if (clientIpAddress is not null)
-                        command.Parameters.AddWithValue("@client_ip", clientIpAddress.ToString());
+                        command.Parameters.AddWithValue("@client_ip", clientIpAddress);
 
                     if (protocol is not null)
                         command.Parameters.AddWithValue("@protocol", (byte)protocol);

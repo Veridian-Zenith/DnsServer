@@ -15,6 +15,7 @@
 		<Description>Allows configuring aliases for any zone (internal or external) such that they all return the same set of records.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

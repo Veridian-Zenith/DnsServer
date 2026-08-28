@@ -16,6 +16,7 @@
 		<Description>Allows creating APP records in primary and forwarder zones that can return automatically generated response for a PTR request for both IPv4 and IPv6.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

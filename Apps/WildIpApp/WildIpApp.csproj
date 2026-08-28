@@ -16,6 +16,7 @@
 		<Description>Allows creating APP records in primary and forwarder zones that can return the IP address embedded in the subdomain name for A and AAAA queries, including compact hexadecimal IPv4 labels. It works similar to sslip.io.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>

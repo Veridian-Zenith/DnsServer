@@ -15,6 +15,7 @@
 		<Description>Allows creating APP records in Conditional Forwarder zones to return NO DATA response for requests that match the configured query type (QTYPE) to prevent them from being forwarded.</Description>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>
