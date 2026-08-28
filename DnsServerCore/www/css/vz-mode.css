@@ -1,0 +1,953 @@
+/*
+   Technitium DNS Server - Veridian Zenith Custom Theme
+   This theme will not go upstream. Maintain separately from amber-mode.css.
+   Inspired by: ~/blockpage/index.html, ~/Work/VZ/vzdev.indevs.in, ~/Work/VZ/llamacpp-ui
+*/
+
+@keyframes vz-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes vz-float-rune {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(1.5deg); }
+    50% { transform: translateY(-4px) rotate(-0.5deg); }
+    75% { transform: translateY(-12px) rotate(1deg); }
+}
+
+@keyframes vz-glow-breathe {
+    0%, 100% { box-shadow: 0 0 8px rgba(255, 45, 45, 0.08); }
+    50% { box-shadow: 0 0 20px rgba(255, 45, 45, 0.2); }
+}
+
+@keyframes vz-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes vz-border-glow {
+    0%, 100% { border-color: rgba(255, 45, 45, 0.12); }
+    50% { border-color: rgba(255, 45, 45, 0.35); }
+}
+
+@keyframes vz-fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vz-slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+html.vz-mode {
+    color-scheme: dark;
+}
+
+html.vz-mode,
+html.vz-mode *,
+html.vz-mode *::before,
+html.vz-mode *::after {
+    box-sizing: border-box;
+}
+
+html.vz-mode {
+    scrollbar-width: thin;
+    scrollbar-color: #FF2D2D #000000;
+}
+
+    html.vz-mode ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    html.vz-mode ::-webkit-scrollbar-track {
+        background: #000000;
+    }
+
+    html.vz-mode ::-webkit-scrollbar-thumb {
+        background: #FF2D2D;
+        border-radius: 4px;
+    }
+
+    html.vz-mode ::-webkit-scrollbar-thumb:hover {
+        background: #ff5555;
+    }
+
+body.vz-mode {
+    background-color: #000000 !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", "Fira Code", "Cascadia Code", monospace !important;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+    body.vz-mode::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(255, 45, 45, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 45, 45, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    body.vz-mode::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+/* Font */
+body.vz-mode,
+body.vz-mode input,
+body.vz-mode button,
+body.vz-mode select,
+body.vz-mode textarea,
+body.vz-mode .panel,
+body.vz-mode .navbar-default,
+body.vz-mode .dropdown-menu,
+body.vz-mode .well,
+body.vz-mode pre,
+body.vz-mode code {
+    font-family: "JetBrains Mono", "Iosevka Charon", "Fira Code", "Cascadia Code", monospace !important;
+}
+
+/* Header */
+body.vz-mode #header {
+    background-color: #0a0a0a !important;
+    box-shadow: 0px 1px 15px 0px rgba(255, 45, 45, 0.1) !important;
+    border-bottom: 1px solid rgba(255, 45, 45, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+    body.vz-mode #header .title .text {
+        background: linear-gradient(135deg, #FF2D2D, #ff6b6b, #FF2D2D);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: vz-gradient-shift 3s ease-in-out infinite;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    body.vz-mode #header .menu .menu-title {
+        color: #d1d5db !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    }
+
+/* Footer */
+body.vz-mode #footer {
+    background-color: #0a0a0a !important;
+    box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.8) !important;
+    color: #6b7280 !important;
+    border-top: 1px solid rgba(255, 45, 45, 0.05);
+}
+
+    body.vz-mode #footer .content {
+        color: #6b7280 !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+        font-size: 11px;
+    }
+
+        body.vz-mode #footer .content a {
+            color: #FF2D2D !important;
+        }
+
+/* Container */
+body.vz-mode .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Panels */
+body.vz-mode .panel,
+body.vz-mode .panel-default {
+    background-color: #0f0f0f !important;
+    border-color: rgba(255, 45, 45, 0.1) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 15px rgba(255, 45, 45, 0.04), 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+    body.vz-mode .panel:hover {
+        box-shadow: 0 0 20px rgba(255, 45, 45, 0.08), 0 4px 20px rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 45, 45, 0.2);
+    }
+
+body.vz-mode .panel-heading {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.1) !important;
+    border-bottom-color: rgba(255, 45, 45, 0.1) !important;
+    color: #FF2D2D !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+body.vz-mode .panel-body {
+    background-color: #0a0a0a !important;
+    color: #e8e8e8 !important;
+}
+
+/* Nav Tabs */
+body.vz-mode .nav-tabs {
+    border-bottom: 1px solid rgba(255, 45, 45, 0.15) !important;
+}
+
+    body.vz-mode .nav-tabs > li > a {
+        color: #6b7280 !important;
+        border-color: transparent !important;
+        border-bottom-color: transparent !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+        font-size: 12px;
+    }
+
+        body.vz-mode .nav-tabs > li > a:hover {
+            background-color: rgba(255, 45, 45, 0.05) !important;
+            border-color: rgba(255, 45, 45, 0.1) !important;
+            border-bottom-color: rgba(255, 45, 45, 0.1) !important;
+            color: #FF2D2D !important;
+        }
+
+    body.vz-mode .nav-tabs > li.active > a,
+    body.vz-mode .nav-tabs > li.active > a:hover,
+    body.vz-mode .nav-tabs > li.active > a:focus {
+        background-color: #0a0a0a !important;
+        border-color: rgba(255, 45, 45, 0.3) !important;
+        border-bottom-color: #FF2D2D !important;
+        color: #FF2D2D !important;
+    }
+
+/* Tables */
+body.vz-mode .table-hover > tbody > tr:hover {
+    background-color: rgba(255, 45, 45, 0.05) !important;
+}
+
+body.vz-mode .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(255, 45, 45, 0.02) !important;
+}
+
+body.vz-mode .table > thead > tr > th,
+body.vz-mode .table > tbody > tr > td,
+body.vz-mode .table > tfoot > tr > th,
+body.vz-mode .table > tfoot > tr > td {
+    border-top-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+body.vz-mode .table-bordered,
+body.vz-mode .table-bordered > thead > tr > th,
+body.vz-mode .table-bordered > tbody > tr > td {
+    border-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+body.vz-mode .table thead th {
+    color: #FF2D2D !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 11px;
+    background-color: #0f0f0f !important;
+    border-bottom-color: rgba(255, 45, 45, 0.15) !important;
+}
+
+/* Forms */
+body.vz-mode .form-control {
+    background-color: #0a0a0a !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 6px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    body.vz-mode .form-control:focus {
+        border-color: rgba(255, 45, 45, 0.5) !important;
+        box-shadow: 0 0 0 2px rgba(255, 45, 45, 0.1) !important;
+        color: #e8e8e8 !important;
+    }
+
+    body.vz-mode .form-control::placeholder {
+        color: #6b7280 !important;
+    }
+
+    body.vz-mode .form-control[disabled],
+    body.vz-mode .form-control[readonly] {
+        background-color: #050505 !important;
+    }
+
+body.vz-mode .input-group-addon {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    color: #FF2D2D !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+body.vz-mode .form-group label.control-label {
+    color: #d1d5db !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    font-size: 12px;
+}
+
+/* Buttons */
+body.vz-mode .btn-default {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.2) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease;
+}
+
+    body.vz-mode .btn-default:hover,
+    body.vz-mode .btn-default.active {
+        background-color: rgba(255, 45, 45, 0.1) !important;
+        border-color: rgba(255, 45, 45, 0.4) !important;
+        color: #FF2D2D !important;
+        box-shadow: 0 0 12px rgba(255, 45, 45, 0.1);
+    }
+
+body.vz-mode .btn-primary {
+    background-color: #FF2D2D !important;
+    border-color: #FF2D2D !important;
+    color: #ffffff !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 6px !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+    body.vz-mode .btn-primary:hover {
+        background-color: #ff1a1a !important;
+        border-color: #ff1a1a !important;
+        box-shadow: 0 0 15px rgba(255, 45, 45, 0.25);
+    }
+
+body.vz-mode .btn-success {
+    background-color: #1a5c1a !important;
+    border-color: #2a7a2a !important;
+    color: #fff !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 6px !important;
+}
+
+body.vz-mode .btn-danger {
+    background-color: #9f2723 !important;
+    border-color: #bd4339 !important;
+    color: #fff !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 6px !important;
+}
+
+    body.vz-mode .btn-danger:hover {
+        background-color: #861b18 !important;
+        border-color: #a9372d !important;
+        box-shadow: 0 0 12px rgba(255, 45, 45, 0.15);
+    }
+
+body.vz-mode .btn-warning {
+    background-color: #8a5c11 !important;
+    border-color: #c57a11 !important;
+    color: #fff !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 6px !important;
+}
+
+body.vz-mode .btn-group .btn {
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+/* Dropdowns */
+body.vz-mode .dropdown-menu {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    box-shadow: 0 0 20px rgba(255, 45, 45, 0.05), 0 8px 24px rgba(0, 0, 0, 0.6);
+    border-radius: 8px !important;
+}
+
+    body.vz-mode .dropdown-menu > li > a {
+        color: #d1d5db !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    body.vz-mode .dropdown-menu > li > a:hover,
+    body.vz-mode .dropdown-menu > li > a:focus {
+        background-color: rgba(255, 45, 45, 0.08) !important;
+        color: #FF2D2D !important;
+    }
+
+    body.vz-mode .dropdown-menu .divider {
+        background-color: rgba(255, 45, 45, 0.08) !important;
+    }
+
+/* Modals */
+body.vz-mode .modal-content {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 30px rgba(255, 45, 45, 0.08), 0 24px 64px rgba(0, 0, 0, 0.7);
+}
+
+body.vz-mode .modal-header {
+    border-bottom-color: rgba(255, 45, 45, 0.1) !important;
+}
+
+    body.vz-mode .modal-header .close {
+        color: #FF2D2D !important;
+        opacity: 0.7 !important;
+        text-shadow: none !important;
+    }
+
+        body.vz-mode .modal-header .close:hover,
+        body.vz-mode .modal-header .close:focus {
+            opacity: 1 !important;
+        }
+
+body.vz-mode .modal-footer {
+    border-top-color: rgba(255, 45, 45, 0.1) !important;
+}
+
+body.vz-mode .modal-title {
+    color: #FF2D2D !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    font-weight: 600;
+}
+
+body.vz-mode .modal-body {
+    color: #e8e8e8 !important;
+}
+
+/* Wells */
+body.vz-mode .well {
+    background-color: #0f0f0f !important;
+    border-color: rgba(255, 45, 45, 0.12) !important;
+    color: #e8e8e8 !important;
+    box-shadow: inset 0 0 10px rgba(255, 45, 45, 0.03);
+    border-radius: 8px !important;
+}
+
+body.vz-mode .well h4 {
+    color: #FF2D2D !important;
+}
+
+/* Labels & Badges */
+body.vz-mode .label-default {
+    background-color: #1a1a1a !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    color: #d1d5db !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+body.vz-mode .label-success {
+    background-color: #1a5c1a !important;
+    color: #fff !important;
+}
+
+body.vz-mode .label-danger {
+    background-color: #9f2723 !important;
+}
+
+body.vz-mode .label-warning {
+    background-color: #8a5c11 !important;
+}
+
+body.vz-mode .badge {
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+/* Alerts */
+body.vz-mode .alert {
+    background-color: #0f0f0f !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    color: #e8e8e8 !important;
+    border-radius: 8px !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+    body.vz-mode .alert-danger {
+        background-color: #1a0a0a !important;
+        border-color: rgba(255, 45, 45, 0.3) !important;
+        color: #ff6b6b !important;
+    }
+
+    body.vz-mode .alert-success {
+        background-color: #0a1a0a !important;
+        border-color: rgba(38, 122, 38, 0.3) !important;
+        color: #6bc76b !important;
+    }
+
+    body.vz-mode .alert-warning {
+        background-color: #1a1205 !important;
+        border-color: rgba(197, 122, 17, 0.3) !important;
+        color: #e39431 !important;
+    }
+
+/* Breadcrumbs */
+body.vz-mode .breadcrumb {
+    background-color: #0a0a0a !important;
+    border-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+    body.vz-mode .breadcrumb > li > a {
+        color: #FF2D2D !important;
+    }
+
+    body.vz-mode .breadcrumb > .active {
+        color: #6b7280 !important;
+    }
+
+/* Pagination */
+body.vz-mode .pagination li a {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.1) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+    body.vz-mode .pagination li a:hover {
+        background-color: rgba(255, 45, 45, 0.08) !important;
+        border-color: rgba(255, 45, 45, 0.3) !important;
+        color: #FF2D2D !important;
+    }
+
+body.vz-mode .pagination .active a {
+    background-color: #FF2D2D !important;
+    border-color: #FF2D2D !important;
+    color: #fff !important;
+}
+
+body.vz-mode .pager li > a {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.1) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+/* Wells & Callouts */
+body.vz-mode .callout {
+    background-color: #0f0f0f !important;
+    border-color: rgba(255, 45, 45, 0.12) !important;
+}
+
+/* Code */
+body.vz-mode pre {
+    background-color: #080808 !important;
+    border-color: rgba(255, 45, 45, 0.1) !important;
+    color: #e8e8e8 !important;
+    border-radius: 6px !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+body.vz-mode code {
+    color: #ff6b6b !important;
+    background-color: #0f0f0f !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    border-radius: 3px !important;
+}
+
+    body.vz-mode pre code {
+        background: transparent !important;
+    }
+
+/* Navbar */
+body.vz-mode .navbar-default {
+    background-color: #0a0a0a !important;
+    border-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+    body.vz-mode .navbar-default .navbar-brand {
+        color: #FF2D2D !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+        font-weight: 700;
+    }
+
+    body.vz-mode .navbar-default .navbar-nav > li > a {
+        color: #d1d5db !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    }
+
+        body.vz-mode .navbar-default .navbar-nav > li > a:hover {
+            color: #FF2D2D !important;
+            background-color: rgba(255, 45, 45, 0.05) !important;
+        }
+
+/* List Group */
+body.vz-mode .list-group-item {
+    background-color: #0f0f0f !important;
+    border-color: rgba(255, 45, 45, 0.08) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+    body.vz-mode .list-group-item:hover {
+        background-color: rgba(255, 45, 45, 0.05) !important;
+        border-color: rgba(255, 45, 45, 0.2) !important;
+    }
+
+    body.vz-mode .list-group-item.active {
+        background-color: #FF2D2D !important;
+        border-color: #FF2D2D !important;
+    }
+
+/* Panels & Tiers */
+body.vz-mode .panel-footer {
+    background-color: #0a0a0a !important;
+    border-top-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+/* Progress Bars */
+body.vz-mode .progress {
+    background-color: #0a0a0a !important;
+    border-radius: 4px !important;
+}
+
+    body.vz-mode .progress-bar {
+        background-color: #FF2D2D !important;
+        box-shadow: 0 0 8px rgba(255, 45, 45, 0.3);
+    }
+
+/* Tables of Contents / Nav */
+body.vz-mode .nav > li > a {
+    color: #d1d5db !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+}
+
+    body.vz-mode .nav > li > a:hover {
+        color: #FF2D2D !important;
+        background-color: rgba(255, 45, 45, 0.05) !important;
+    }
+
+    body.vz-mode .nav > .active > a {
+        color: #FF2D2D !important;
+        background-color: rgba(255, 45, 45, 0.08) !important;
+    }
+
+/* Checkboxes & Radios */
+body.vz-mode .checkbox,
+body.vz-mode .radio {
+    color: #e8e8e8 !important;
+}
+
+    body.vz-mode .checkbox input[type="checkbox"],
+    body.vz-mode .radio input[type="radio"] {
+        accent-color: #FF2D2D !important;
+    }
+
+/* Collapsible */
+body.vz-mode .collapsed {
+    color: #6b7280 !important;
+}
+
+/* Accordion */
+body.vz-mode .panel-group .panel {
+    border-radius: 8px !important;
+}
+
+    body.vz-mode .panel-group .panel + .panel {
+        margin-top: 4px !important;
+    }
+
+/* Input Groups */
+body.vz-mode .input-group .form-control {
+    border-radius: 0 !important;
+}
+
+    body.vz-mode .input-group:first-child .form-control {
+        border-top-left-radius: 6px !important;
+        border-bottom-left-radius: 6px !important;
+    }
+
+    body.vz-mode .input-group:last-child .form-control {
+        border-top-right-radius: 6px !important;
+        border-bottom-right-radius: 6px !important;
+    }
+
+/* Tooltips */
+body.vz-mode .tooltip {
+    background-color: #1a1a1a !important;
+    border-color: rgba(255, 45, 45, 0.2) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    font-size: 12px;
+    border-radius: 6px !important;
+    box-shadow: 0 0 12px rgba(255, 45, 45, 0.1);
+}
+
+    body.vz-mode .tooltip-inner {
+        background-color: #1a1a1a !important;
+    }
+
+    body.vz-mode .tooltip.top .tooltip-arrow {
+        border-top-color: rgba(255, 45, 45, 0.2) !important;
+    }
+
+/* Popovers */
+body.vz-mode .popover {
+    background-color: #111111 !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 20px rgba(255, 45, 45, 0.05), 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+    body.vz-mode .popover-title {
+        background-color: #111111 !important;
+        border-color: rgba(255, 45, 45, 0.1) !important;
+        color: #FF2D2D !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    }
+
+    body.vz-mode .popover-content {
+        color: #e8e8e8 !important;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    }
+
+/* Datepicker */
+body.vz-mode .input-group.date input,
+body.vz-mode input[type="datetime-local"] {
+    color-scheme: dark;
+}
+
+/* Charts */
+body.vz-mode .c3-axis-x text,
+body.vz-mode .c3-axis-y text,
+body.vz-mode .c3-legend-item {
+    fill: #d1d5db !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    font-size: 11px;
+}
+
+body.vz-mode .c3-grid line {
+    stroke: rgba(255, 45, 45, 0.08) !important;
+}
+
+body.vz-mode .c3-line {
+    stroke: #FF2D2D !important;
+}
+
+body.vz-mode .c3-circle {
+    fill: #FF2D2D !important;
+}
+
+body.vz-mode .c3-bar {
+    fill: #FF2D2D !important;
+}
+
+/* Select */
+body.vz-mode select {
+    background-color: #0a0a0a !important;
+    border-color: rgba(255, 45, 45, 0.15) !important;
+    color: #e8e8e8 !important;
+    font-family: "JetBrains Mono", "Iosevka Charon", monospace !important;
+    accent-color: #FF2D2D;
+}
+
+/* Textareas */
+body.vz-mode textarea.form-control {
+    resize: vertical;
+}
+
+/* Stats Panel */
+body.vz-mode .stats-panel .stats-item {
+    border-right-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+    body.vz-mode .stats-panel .stats-item .number {
+        color: #FF2D2D !important;
+    }
+
+body.vz-mode .zone-stats-panel .stats-item {
+    border-right-color: rgba(255, 45, 45, 0.08) !important;
+}
+
+/* About */
+body.vz-mode .about h1 {
+    color: #FF2D2D !important;
+}
+
+body.vz-mode .about p {
+    color: #6b7280 !important;
+}
+
+body.vz-mode .about h3 a {
+    color: #FF2D2D !important;
+}
+
+/* Navbar Custom */
+body.vz-mode .navbar-custom {
+    background-color: rgba(10, 10, 10, 0.85) !important;
+    border: 1px solid rgba(255, 45, 45, 0.1) !important;
+    backdrop-filter: blur(12px);
+}
+
+/* Gradient Text */
+body.vz-mode .gradient-text,
+body.vz-mode .gradient-themeable {
+    background: linear-gradient(135deg, #FF2D2D, #ff6b6b, #FF2D2D);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: vz-gradient-shift 3s ease-in-out infinite;
+}
+
+/* Glow Utilities */
+body.vz-mode .glow-red {
+    box-shadow: 0 0 15px rgba(255, 45, 45, 0.15), 0 0 30px rgba(255, 45, 45, 0.05);
+}
+
+body.vz-mode .glow-red-strong {
+    box-shadow: 0 0 20px rgba(255, 45, 45, 0.3), 0 0 40px rgba(255, 45, 45, 0.1);
+}
+
+body.vz-mode .text-glow {
+    text-shadow: 0 0 10px rgba(255, 45, 45, 0.5), 0 0 20px rgba(255, 45, 45, 0.2);
+}
+
+body.vz-mode .card-glow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+    body.vz-mode .card-glow:hover {
+        box-shadow: 0 0 20px rgba(255, 45, 45, 0.08), 0 4px 20px rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 45, 45, 0.25);
+    }
+
+/* Glass */
+body.vz-mode .glass {
+    background: rgba(255, 45, 45, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 45, 45, 0.1);
+}
+
+/* Gradient Border */
+body.vz-mode .gradient-border {
+    position: relative;
+}
+
+    body.vz-mode .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(255, 45, 45, 0.3), transparent 50%, rgba(255, 45, 45, 0.15));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+/* Sidebar Active Indicator */
+body.vz-mode .sidebar-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 60%;
+    background: #FF2D2D;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 8px rgba(255, 45, 45, 0.5);
+}
+
+/* Animations */
+body.vz-mode .vz-animate-fade-in {
+    animation: vz-fade-in 0.3s ease-out forwards;
+}
+
+body.vz-mode .vz-animate-slide-up {
+    animation: vz-slide-up 0.3s ease-out forwards;
+}
+
+body.vz-mode .vz-animate-border-glow {
+    animation: vz-border-glow 3s ease-in-out infinite;
+}
+
+/* Staggered fade-in for lists */
+body.vz-mode .vz-stagger-child {
+    animation: vz-fade-in 0.3s ease-out forwards;
+    opacity: 0;
+}
+
+    body.vz-mode .vz-stagger-child:nth-child(1) { animation-delay: 0.05s; }
+    body.vz-mode .vz-stagger-child:nth-child(2) { animation-delay: 0.1s; }
+    body.vz-mode .vz-stagger-child:nth-child(3) { animation-delay: 0.15s; }
+    body.vz-mode .vz-stagger-child:nth-child(4) { animation-delay: 0.2s; }
+    body.vz-mode .vz-stagger-child:nth-child(5) { animation-delay: 0.25s; }
+    body.vz-mode .vz-stagger-child:nth-child(6) { animation-delay: 0.3s; }
+    body.vz-mode .vz-stagger-child:nth-child(7) { animation-delay: 0.35s; }
+    body.vz-mode .vz-stagger-child:nth-child(8) { animation-delay: 0.4s; }
+
+/* Ambient runes (optional decoration) */
+body.vz-mode .vz-ambient-runes {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+    body.vz-mode .vz-ambient-runes .vz-rune {
+        position: absolute;
+        font-family: "JetBrains Mono", "Iosevka Charon", monospace;
+        font-size: clamp(3rem, 8vw, 10rem);
+        color: #FF2D2D;
+        opacity: 0.025;
+        filter: blur(1px);
+        animation: vz-float-rune 20s ease-in-out infinite;
+        user-select: none;
+    }
+
+/* Performance: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    body.vz-mode .vz-animate-fade-in,
+    body.vz-mode .vz-animate-slide-up,
+    body.vz-mode .vz-animate-border-glow,
+    body.vz-mode .vz-stagger-child {
+        animation: none !important;
+    }
+
+    body.vz-mode .gradient-text,
+    body.vz-mode .vz-gradient-shift {
+        animation: none !important;
+        -webkit-text-fill-color: #FF2D2D;
+        color: #FF2D2D;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body.vz-mode .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    body.vz-mode #header .title .text {
+        font-size: 18px !important;
+    }
+}
+
+/* Scrollbar gutter */
+body.vz-mode {
+    scrollbar-gutter: stable;
+}

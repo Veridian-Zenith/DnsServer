@@ -3209,14 +3209,15 @@ function initTheme() {
     if (window.matchMedia) {
         window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
             const currentTheme = localStorage.getItem("theme");
-            switch (currentTheme) {
-                case "light":
-                case "dark":
-                case "amber":
-                    //do nothing
-                    break;
+                    switch (currentTheme) {
+                        case "light":
+                        case "dark":
+                        case "amber":
+                        case "vz":
+                            //do nothing
+                            break;
 
-                default:
+                        default:
                     if (e.matches)
                         applyDarkMode();
                     else
@@ -3241,11 +3242,15 @@ function changeTheme(newTheme) {
             applyDarkMode();
             break;
 
-        case "amber":
-            applyAmberMode();
-            break;
+                case "amber":
+                    applyAmberMode();
+                    break;
 
-        default:
+                case "vz":
+                    applyVzMode();
+                    break;
+
+                default:
             if (window.matchMedia) {
                 if (window.matchMedia("(prefers-color-scheme: dark)").matches)
                     applyDarkMode();
@@ -3281,6 +3286,11 @@ function applyAmberMode() {
     document.body.classList.remove("light-mode", "dark-mode");
 }
 
+function applyVzMode() {
+    document.body.classList.add("vz-mode");
+    document.body.classList.remove("light-mode", "dark-mode", "amber-mode");
+}
+
 function showChangeThemeModal() {
     const currentTheme = localStorage.getItem("theme");
     switch (currentTheme) {
@@ -3292,13 +3302,17 @@ function showChangeThemeModal() {
             $("#rdChangeThemeDark").prop("checked", true);
             break;
 
-        case "amber":
-            $("#rdChangeThemeAmber").prop("checked", true);
-            break;
+                    case "amber":
+                        $("#rdChangeThemeAmber").prop("checked", true);
+                        break;
 
-        default:
-            $("#rdChangeThemeSystem").prop("checked", true);
-            break;
+                    case "vz":
+                        $("#rdChangeThemeVZ").prop("checked", true);
+                        break;
+
+                    default:
+                        $("#rdChangeThemeSystem").prop("checked", true);
+                        break;
     }
 
     $("#modalChangeTheme").modal("show");

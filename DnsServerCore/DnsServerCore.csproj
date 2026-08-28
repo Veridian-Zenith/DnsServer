@@ -71,6 +71,7 @@
 		<None Remove="www\css\dark-mode.css" />
 		<None Remove="www\css\font-awesome.min.css" />
 		<None Remove="www\css\main.css" />
+		<None Remove="www\css\vz-mode.css" />
 		<None Remove="www\favicon.ico" />
 		<None Remove="www\fonts\fontawesome-webfont.eot" />
 		<None Remove="www\fonts\fontawesome-webfont.svg" />
@@ -165,6 +166,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="www\css\main.css">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="www\css\vz-mode.css">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="www\fonts\fontawesome-webfont.eot">
