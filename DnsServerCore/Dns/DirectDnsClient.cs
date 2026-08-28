@@ -47,7 +47,7 @@ namespace DnsServerCore.Dns
 
         #region protected
 
-        protected override async Task<DnsDatagram> InternalResolveAsync(DnsDatagram request, Func<DnsDatagram, CancellationToken, Task<DnsDatagram>> getValidatedResponseAsync = null, bool doNotReorderNameServers = false, CancellationToken cancellationToken = default)
+        protected override async Task<DnsDatagram> InternalResolveAsync(DnsDatagram request, Func<DnsDatagram, CancellationToken, Task<DnsDatagram>> getValidatedResponseAsync = null, bool doNotReorderNameServers = false, ResolverContext context = null, CancellationToken cancellationToken = default)
         {
             DnsDatagram response = await _dnsServer.DirectQueryAsync(request, Timeout, cancellationToken: cancellationToken);
 

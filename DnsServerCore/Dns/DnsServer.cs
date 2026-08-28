@@ -5390,7 +5390,7 @@ namespace DnsServerCore.Dns
                 {
                     Stopwatch stopwatch = Stopwatch.StartNew();
 
-                    DnsDatagram response = await DnsClient.RecursiveResolveAsync(question, dnsCache, _proxy, _ipv6Mode, _udpPayloadSize, _randomizeName, _qnameMinimization, dnssecValidation, eDnsClientSubnet, _resolverRetries, _resolverTimeout, _resolverConcurrency, _resolverMaxStackCount, true, true, null, cancellationToken1);
+                    DnsDatagram response = await DnsClient.RecursiveResolveAsync(question, dnsCache, _proxy, _ipv6Mode, _udpPayloadSize, _randomizeName, _qnameMinimization, dnssecValidation, eDnsClientSubnet, _resolverRetries, _resolverTimeout, _resolverConcurrency, _resolverMaxStackCount, true, true, null, null, cancellationToken1);
 
                     stopwatch.Stop();
                     response = response.CloneWithMetadata(response.Metadata?.NameServer, stopwatch.Elapsed.TotalMilliseconds);
