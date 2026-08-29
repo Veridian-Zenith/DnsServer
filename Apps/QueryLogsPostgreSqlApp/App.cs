@@ -753,7 +753,7 @@ namespace QueryLogsPostgreSql
                         command.Parameters.AddWithValue("@end", end);
 
                     if (clientIpAddress is not null)
-                        command.Parameters.AddWithValue("@client_ip", clientIpAddress.ToString());
+                        command.Parameters.AddWithValue("@client_ip", clientIpAddress);
 
                     if (protocol is not null)
                         command.Parameters.AddWithValue("@protocol", (byte)protocol);
