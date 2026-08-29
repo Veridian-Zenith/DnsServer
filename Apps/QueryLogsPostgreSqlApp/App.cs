@@ -390,7 +390,7 @@ namespace QueryLogsPostgreSql
      dlid bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
      server varchar(255),
      timestamp timestamp with time zone NOT NULL,
-     client_ip VARCHAR(39) NOT NULL,
+     client_ip inet NOT NULL,
      protocol SMALLINT NOT NULL,
      response_type SMALLINT NOT NULL,
      response_rtt REAL,
@@ -865,7 +865,7 @@ LIMIT @limit OFFSET @offset";
                             else
                                 answer = reader.GetString(10);
 
-                            entries.Add(new DnsLogEntry(rowNumber, reader.GetDateTime(1), IPAddress.Parse(reader.GetString(2)), (DnsTransportProtocol)reader.GetByte(3), (DnsServerResponseType)reader.GetByte(4), responseRtt, (DnsResponseCode)reader.GetByte(6), question, answer));
+                            entries.Add(new DnsLogEntry(rowNumber, reader.GetDateTime(1), IPAddress.Parse(reader.GetFieldValue<IPAddress>(2).ToString()), (DnsTransportProtocol)reader.GetByte(3), (DnsServerResponseType)reader.GetByte(4), responseRtt, (DnsResponseCode)reader.GetByte(6), question, answer));
 
                             if (descendingOrder)
                                 rowNumber--;
