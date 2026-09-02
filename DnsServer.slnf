@@ -1,0 +1,38 @@
+{
+  "solution": {
+    "path": "DnsServer.sln",
+    "projects": [
+      "DnsServerApp/DnsServerApp.csproj",
+      "DnsServerCore/DnsServerCore.csproj",
+      "DnsServerCore.ApplicationCommon/DnsServerCore.ApplicationCommon.csproj",
+      "Apps/GeoContinentApp/GeoContinentApp.csproj",
+      "Apps/GeoCountryApp/GeoCountryApp.csproj",
+      "Apps/GeoDistanceApp/GeoDistanceApp.csproj",
+      "Apps/SplitHorizonApp/SplitHorizonApp.csproj",
+      "Apps/WhatIsMyDnsApp/WhatIsMyDnsApp.csproj",
+      "Apps/FailoverApp/FailoverApp.csproj",
+      "Apps/DropRequestsApp/DropRequestsApp.csproj",
+      "Apps/QueryLogsSqliteApp/QueryLogsSqliteApp.csproj",
+      "Apps/LogExporterApp/LogExporterApp.csproj",
+      "Apps/AdvancedBlockingApp/AdvancedBlockingApp.csproj",
+      "Apps/NxDomainApp/NxDomainApp.csproj",
+      "Apps/BlockPageApp/BlockPageApp.csproj",
+      "Apps/WildIpApp/WildIpApp.csproj",
+      "Apps/NoDataApp/NoDataApp.csproj",
+      "Apps/Dns64App/Dns64App.csproj",
+      "Apps/DnsBlockListApp/DnsBlockListApp.csproj",
+      "Apps/AdvancedForwardingApp/AdvancedForwardingApp.csproj",
+      "Apps/AutoPtrApp/AutoPtrApp.csproj",
+      "Apps/WeightedRoundRobinApp/WeightedRoundRobinApp.csproj",
+      "Apps/ZoneAliasApp/ZoneAliasApp.csproj",
+      "Apps/NxDomainOverrideApp/NxDomainOverrideApp.csproj",
+      "Apps/DefaultRecordsApp/DefaultRecordsApp.csproj",
+      "Apps/DnsRebindingProtectionApp/DnsRebindingProtectionApp.csproj",
+      "Apps/FilterAaaaApp/FilterAaaaApp.csproj",
+      "Apps/QueryLogsSqlServerApp/QueryLogsSqlServerApp.csproj",
+      "Apps/QueryLogsMySqlApp/QueryLogsMySqlApp.csproj",
+      "DnsServerCore.HttpApi/DnsServerCore.HttpApi.csproj",
+      "Apps/QueryLogsPostgreSqlApp/QueryLogsPostgreSqlApp.csproj"
+    ]
+  }
+}

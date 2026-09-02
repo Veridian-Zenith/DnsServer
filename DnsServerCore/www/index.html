@@ -38,8 +38,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <script src="js/moment.min.js"></script>
 
     <link href="css/main.css" rel="stylesheet" />
-    <link href="css/dark-mode.css" rel="stylesheet" />
-    <link href="css/amber-mode.css" rel="stylesheet" />
 
     <script src="js/common.js"></script>
     <script src="js/main.js"></script>
@@ -68,7 +66,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <li><a id="mnuUserConfigure2FA" href="#" onclick="showConfigure2FAModal(); return false;">Configure 2FA</a></li>
                 <li><a href="#" onclick="showCreateMyApiTokenModal(); return false;">Create API Token</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#" onclick="showChangeThemeModal(); return false;">Change Theme</a></li>
                 <li><a id="mnuDisableCheckForUpdateNotification" href="#" onclick="disableUpdateNotification(); return false;" style="display: none;">Disable Update Notification</a></li>
                 <li><a id="mnuEnableCheckForUpdateNotification" href="#" onclick="enableUpdateNotification(); return false;" style="display: none;">Enable Update Notification</a></li>
                 <li><a href="#" onclick="checkForUpdate(true); return false;">Check For Update</a></li>
@@ -3807,53 +3804,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <div class="modal-footer">
                         <button id="btnEnable2FA" type="submit" class="btn btn-primary" data-loading-text="Working..." onclick="enable2FA(this); return false;">Enable</button>
                         <button id="btnDisable2FA" type="button" class="btn btn-warning" data-loading-text="Working..." onclick="disable2FA(this); return false;">Disable</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div id="modalChangeTheme" class="modal fade" tabindex="-1" role="dialog">
-        <form class="form-horizontal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Change Theme</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Theme</label>
-                            <div class="col-sm-8">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="rdChangeTheme" id="rdChangeThemeSystem" onclick="changeTheme('system');">
-                                        Use System Theme (default)
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="rdChangeTheme" id="rdChangeThemeLight" onclick="changeTheme('light');">
-                                        Light Theme
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="rdChangeTheme" id="rdChangeThemeDark" onclick="changeTheme('dark');">
-                                        Dark Theme
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="rdChangeTheme" id="rdChangeThemeAmber" onclick="changeTheme('amber');">
-                                        Amber Theme
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>

@@ -265,7 +265,6 @@ function showPageMain() {
 }
 
 $(function () {
-    initTheme();
     initUpdateNotificationMenu();
 
     var headerHtml = $("#header").html();
@@ -3204,103 +3203,4 @@ function restoreSettings() {
         },
         objAlertPlaceholder: divRestoreSettingsAlert
     });
-}
-
-function initTheme() {
-    if (window.matchMedia) {
-        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
-            const currentTheme = localStorage.getItem("theme");
-            switch (currentTheme) {
-                case "light":
-                case "dark":
-                case "amber":
-                    //do nothing
-                    break;
-
-                default:
-                    if (e.matches)
-                        applyDarkMode();
-                    else
-                        applyLightMode();
-
-                    break;
-            }
-        });
-    }
-
-    const currentTheme = localStorage.getItem("theme");
-    changeTheme(currentTheme);
-}
-
-function changeTheme(newTheme) {
-    switch (newTheme) {
-        case "light":
-            applyLightMode();
-            break;
-
-        case "dark":
-            applyDarkMode();
-            break;
-
-        case "amber":
-            applyAmberMode();
-            break;
-
-        default:
-            if (window.matchMedia) {
-                if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-                    applyDarkMode();
-                else
-                    applyLightMode();
-            }
-
-            break;
-    }
-
-    localStorage.setItem("theme", newTheme);
-
-    if (window.chartDashboardMain) {
-        window.chartDashboardMain.update();
-        window.chartDashboardPie.update();
-        window.chartDashboardPie2.update();
-        window.chartDashboardPie3.update();
-    }
-}
-
-function applyDarkMode() {
-    document.body.classList.add("dark-mode");
-    document.body.classList.remove("light-mode", "amber-mode");
-}
-
-function applyLightMode() {
-    document.body.classList.add("light-mode");
-    document.body.classList.remove("dark-mode", "amber-mode");
-}
-
-function applyAmberMode() {
-    document.body.classList.add("amber-mode");
-    document.body.classList.remove("light-mode", "dark-mode");
-}
-
-function showChangeThemeModal() {
-    const currentTheme = localStorage.getItem("theme");
-    switch (currentTheme) {
-        case "light":
-            $("#rdChangeThemeLight").prop("checked", true);
-            break;
-
-        case "dark":
-            $("#rdChangeThemeDark").prop("checked", true);
-            break;
-
-        case "amber":
-            $("#rdChangeThemeAmber").prop("checked", true);
-            break;
-
-        default:
-            $("#rdChangeThemeSystem").prop("checked", true);
-            break;
-    }
-
-    $("#modalChangeTheme").modal("show");
 }

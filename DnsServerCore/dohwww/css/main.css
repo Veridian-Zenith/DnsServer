@@ -1,19 +1,73 @@
-﻿
+﻿/*
+Technitium DNS Server - DoH Info Page
+Glassy AMOLED Red/Black Theme (matches main app)
+*/
+
+:root {
+    --bg-base: #000000;
+    --bg-elevated: rgba(20, 8, 8, 0.55);
+    --border-base: rgba(225, 6, 0, 0.18);
+    --border-strong: rgba(225, 6, 0, 0.35);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 235, 235, 0.72);
+    --accent: #e10600;
+    --accent-bright: #ff2d2d;
+    --accent-glow-soft: rgba(225, 6, 0, 0.18);
+    --blur-amount: 18px;
+    --radius: 10px;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 html, body {
     height: 100% !important;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0202;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent), #6e0300);
+    border-radius: 6px;
+    border: 3px solid #0a0202;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) #0a0202;
 }
 
 body {
     margin: 0px !important;
     line-height: 1.42857143 !important;
+    background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(225, 6, 0, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 100% 110%, rgba(225, 6, 0, 0.12), transparent 60%),
+        #000000;
+    background-attachment: fixed;
+    color-scheme: dark;
 }
 
 a {
-    color: #6699ff;
+    color: var(--accent-bright);
+    text-decoration: none;
+    transition: color 120ms ease;
 }
 
-    a:hover {
-        color: #6699ff;
+    a:hover, a:focus {
+        color: #ff5757;
+        text-decoration: none;
     }
 
 #content {
@@ -23,7 +77,7 @@ a {
 .container {
     margin-left: auto;
     margin-right: auto;
-    padding: 55px 15px 60px 15px;
+    padding: 60px 15px 60px 15px;
     word-wrap: break-word;
 }
 
@@ -40,33 +94,63 @@ a {
 
 .features {
     margin: 80px auto 40px auto;
-    font-family: Arial;
+    text-align: center;
 }
 
-    .features .pull-left {
-        width: 50%;
-    }
-
-    .features .pull-right {
-        width: 50%;
+    .features h1 {
+        color: var(--text-primary);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-top: 18px;
+        text-shadow: 0 0 24px var(--accent-glow-soft);
+        background: linear-gradient(180deg, #ffffff 0%, #ffb3b3 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     .features h3 {
         font-size: 22px;
         text-align: center;
+        color: var(--text-primary);
+        margin-top: 40px;
+        letter-spacing: 0.3px;
     }
 
     .features p {
-        color: rgb(119, 119, 119);
+        color: var(--text-secondary);
         text-align: center;
+        max-width: 800px;
+        margin: 12px auto;
     }
 
     .features li {
-        color: rgb(119, 119, 119);
+        color: var(--text-secondary);
     }
 
+    .features #lnkDoH {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(225, 6, 0, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--border-strong);
+        border-radius: 6px;
+        color: var(--accent-bright) !important;
+        font-weight: 600;
+        word-break: break-all;
+    }
+
+        .features #lnkDoH:hover {
+            background: rgba(225, 6, 0, 0.25);
+            color: #ff5757 !important;
+            text-decoration: none;
+        }
+
 .shadow-screenshot {
-    box-shadow: 2px 3px 15px 1px #888888;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-glow-soft);
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius);
 }
 
 .auto-resize-img {
@@ -75,6 +159,11 @@ a {
     display: block;
     margin-right: auto;
     margin-left: auto;
+}
+
+::selection {
+    background: var(--accent);
+    color: #ffffff;
 }
 
 @media (min-width: 992px) {
@@ -86,9 +175,5 @@ a {
 @media (min-width: 1200px) {
     #header .title, .container, #footer .content {
         width: 1170px;
-    }
-
-    .stats-panel .stats-item {
-        padding: 6px !important;
     }
 }
