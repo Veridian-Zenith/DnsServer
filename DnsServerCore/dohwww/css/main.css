@@ -1,49 +1,43 @@
 ﻿/*
 Technitium DNS Server - DoH Info Page
-Glassy AMOLED Red/Black Theme (matches main app)
+Glassy AMOLED Red/Black Theme v2 (matches main app)
 */
 
 :root {
     --bg-base: #000000;
-    --bg-elevated: rgba(20, 8, 8, 0.55);
-    --border-base: rgba(225, 6, 0, 0.18);
-    --border-strong: rgba(225, 6, 0, 0.35);
+    --bg-elevated: rgba(20, 8, 8, 0.62);
+    --border-base: rgba(225, 6, 0, 0.20);
+    --border-strong: rgba(225, 6, 0, 0.40);
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 235, 235, 0.72);
+    --text-secondary: rgba(255, 235, 235, 0.74);
     --accent: #e10600;
     --accent-bright: #ff2d2d;
+    --accent-soft: #ff5a5a;
     --accent-glow-soft: rgba(225, 6, 0, 0.18);
-    --blur-amount: 18px;
-    --radius: 14px;
+    --radius: 12px;
     --radius-sm: 8px;
-    --radius-lg: 20px;
+    --radius-lg: 18px;
     --radius-pill: 999px;
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    --transition-fast: 160ms var(--ease-out);
-    --transition-med: 260ms var(--ease-out);
-}
-
-@keyframes ambient-drift {
-    0%   { transform: translate3d(0, 0, 0) scale(1); }
-    50%  { transform: translate3d(2%, 1%, 0) scale(1.05); }
-    100% { transform: translate3d(0, 0, 0) scale(1); }
+    --t-fast: 140ms var(--ease-out);
+    --t-med: 220ms var(--ease-out);
 }
 
 @keyframes fade-up {
-    from { opacity: 0; transform: translate3d(0, 14px, 0); }
+    from { opacity: 0; transform: translate3d(0, 12px, 0); }
     to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes glow-sweep {
     0%   { left: -120%; }
-    100% { left: 220%; }
+    60%  { left: 130%; }
+    100% { left: 130%; }
 }
 
-@keyframes shimmer {
-    0%   { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -79,6 +73,7 @@ html, body {
     background: linear-gradient(180deg, var(--accent), #6e0300);
     border-radius: 6px;
     border: 3px solid #0a0202;
+    transition: background var(--t-fast);
 }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -99,32 +94,24 @@ body {
         #000000;
     background-attachment: fixed;
     color-scheme: dark;
-    overflow-x: hidden;
 }
-
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background:
-            radial-gradient(600px 400px at 80% 20%, rgba(225, 6, 0, 0.10), transparent 60%),
-            radial-gradient(500px 350px at 10% 90%, rgba(225, 6, 0, 0.08), transparent 60%);
-        animation: ambient-drift 18s var(--ease-in-out) infinite;
-        z-index: -1;
-    }
 
 a {
     color: var(--accent-bright);
     text-decoration: none;
-    transition: color var(--transition-fast), text-shadow var(--transition-fast);
+    transition: color var(--t-fast), text-shadow var(--t-fast);
 }
 
     a:hover, a:focus {
-        color: #ff5757;
+        color: var(--accent-soft);
         text-decoration: none;
         text-shadow: 0 0 10px var(--accent-glow-soft);
     }
+
+::selection {
+    background: var(--accent);
+    color: #ffffff;
+}
 
 #content {
     min-height: 100%;
@@ -133,16 +120,16 @@ a {
 .container {
     margin-left: auto;
     margin-right: auto;
-    padding: 60px 15px 60px 15px;
+    padding: 60px 15px;
     word-wrap: break-word;
-    animation: fade-up 700ms var(--ease-out) 100ms both;
+    animation: fade-up 600ms var(--ease-out) 80ms both;
 }
 
     .container .pageLogin {
         display: none;
         margin: auto;
         width: 500px;
-        padding: 150px 0 0 0;
+        padding: 150px 0 0;
     }
 
     .container .page {
@@ -150,16 +137,16 @@ a {
     }
 
 .features {
-    margin: 60px auto 40px auto;
+    margin: 60px auto 40px;
     text-align: center;
-    animation: fade-up 800ms var(--ease-out) 200ms both;
+    animation: fade-up 700ms var(--ease-out) 150ms both;
 }
 
     .features > img {
         max-width: 64px;
         border-radius: 14px;
         filter: drop-shadow(0 0 12px var(--accent-glow-soft));
-        transition: transform var(--transition-med), filter var(--transition-med);
+        transition: transform var(--t-med), filter var(--t-med);
     }
 
         .features > img:hover {
@@ -216,9 +203,7 @@ a {
     .features #lnkDoH {
         display: inline-block;
         padding: 12px 22px;
-        background: rgba(225, 6, 0, 0.12);
-        backdrop-filter: blur(10px) saturate(150%);
-        -webkit-backdrop-filter: blur(10px) saturate(150%);
+        background: rgba(225, 6, 0, 0.14);
         border: 1px solid var(--border-strong);
         border-radius: var(--radius);
         color: var(--accent-bright) !important;
@@ -227,12 +212,8 @@ a {
         font-size: 15px;
         position: relative;
         overflow: hidden;
-        transition:
-            transform var(--transition-fast),
-            background var(--transition-fast),
-            box-shadow var(--transition-fast),
-            color var(--transition-fast);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 14px var(--accent-glow-soft);
+        transition: transform var(--t-fast), background var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 14px var(--accent-glow-soft);
     }
 
         .features #lnkDoH::before {
@@ -248,13 +229,11 @@ a {
         }
 
         .features #lnkDoH:hover {
-            background: rgba(225, 6, 0, 0.25);
-            color: #ff5757 !important;
+            background: rgba(225, 6, 0, 0.28);
+            color: var(--accent-soft) !important;
             text-decoration: none;
             transform: translateY(-2px) scale(1.02);
-            box-shadow:
-                0 10px 28px rgba(225, 6, 0, 0.25),
-                0 0 26px var(--accent-glow-soft);
+            box-shadow: 0 10px 26px rgba(225, 6, 0, 0.25), 0 0 24px var(--accent-glow-soft);
         }
 
         .features #lnkDoH:active {
@@ -262,35 +241,30 @@ a {
         }
 
 .shadow-screenshot {
-    box-shadow:
-        0 16px 48px rgba(0, 0, 0, 0.8),
-        0 0 40px var(--accent-glow-soft);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-glow-soft);
     border: 1px solid var(--border-base);
     border-radius: var(--radius-lg);
-    transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
-    animation: fade-up 800ms var(--ease-out) 400ms both;
+    transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
+    animation: fade-up 700ms var(--ease-out) 280ms both;
 }
 
     .shadow-screenshot:hover {
         transform: scale(1.015);
         border-color: var(--border-strong);
-        box-shadow:
-            0 24px 64px rgba(0, 0, 0, 0.85),
-            0 0 60px var(--accent-glow-soft);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 60px var(--accent-glow-soft);
     }
 
 .auto-resize-img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
+    transition: filter var(--t-med), transform var(--t-med);
 }
 
-::selection {
-    background: var(--accent);
-    color: #ffffff;
-}
+    .auto-resize-img:hover {
+        filter: drop-shadow(0 0 14px var(--accent-glow-soft));
+    }
 
 @media (min-width: 992px) {
     #header .title, .container, #footer .content {
