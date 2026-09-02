@@ -1,6 +1,10 @@
 ﻿/*
 Technitium DNS Server - DoH Info Page
 Glassy AMOLED Red/Black Theme v2 (matches main app)
+
+Theme & UI/UX modifications copyright (C) 2026 Dae Euhwa
+Licensed under the GNU General Public License v3 (or later) as published by
+the Free Software Foundation, consistent with the Technitium DNS Server license.
 */
 
 :root {
@@ -10,10 +14,10 @@ Glassy AMOLED Red/Black Theme v2 (matches main app)
     --border-strong: rgba(225, 6, 0, 0.40);
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 235, 235, 0.74);
-    --accent: #e10600;
-    --accent-bright: #ff2d2d;
-    --accent-soft: #ff5a5a;
-    --accent-glow-soft: rgba(225, 6, 0, 0.18);
+    --accent: #ff0a14;
+    --accent-bright: #ff3340;
+    --accent-soft: #ff6a72;
+    --accent-glow-soft: rgba(255, 10, 20, 0.22);
     --radius: 12px;
     --radius-sm: 8px;
     --radius-lg: 18px;
@@ -89,8 +93,9 @@ body {
     margin: 0px !important;
     line-height: 1.42857143 !important;
     background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(225, 6, 0, 0.18), transparent 60%),
-        radial-gradient(900px 500px at 100% 110%, rgba(225, 6, 0, 0.12), transparent 60%),
+        radial-gradient(1400px 700px at 15% -8%, rgba(255, 10, 20, 0.28), transparent 60%),
+        radial-gradient(1100px 600px at 105% 115%, rgba(255, 10, 20, 0.20), transparent 60%),
+        radial-gradient(900px 500px at 50% 50%, rgba(255, 10, 20, 0.05), transparent 70%),
         #000000;
     background-attachment: fixed;
     color-scheme: dark;
@@ -155,15 +160,11 @@ a {
         }
 
     .features h1 {
-        color: var(--text-primary);
+        color: #ffd0d0;
         font-weight: 600;
         letter-spacing: 0.5px;
         margin-top: 18px;
-        text-shadow: 0 0 24px var(--accent-glow-soft);
-        background: linear-gradient(180deg, #ffffff 0%, #ffb3b3 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 24px rgba(255, 10, 20, 0.55);
     }
 
     .features h3 {
@@ -203,7 +204,7 @@ a {
     .features #lnkDoH {
         display: inline-block;
         padding: 12px 22px;
-        background: rgba(225, 6, 0, 0.14);
+        background: rgba(255, 10, 20, 0.20);
         border: 1px solid var(--border-strong);
         border-radius: var(--radius);
         color: var(--accent-bright) !important;
@@ -213,7 +214,7 @@ a {
         position: relative;
         overflow: hidden;
         transition: transform var(--t-fast), background var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 14px var(--accent-glow-soft);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow-soft);
     }
 
         .features #lnkDoH::before {
@@ -223,17 +224,17 @@ a {
             left: -120%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.20), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.25), transparent);
             animation: glow-sweep 4s var(--ease-in-out) infinite;
             pointer-events: none;
         }
 
         .features #lnkDoH:hover {
-            background: rgba(225, 6, 0, 0.28);
+            background: rgba(255, 10, 20, 0.35);
             color: var(--accent-soft) !important;
             text-decoration: none;
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 26px rgba(225, 6, 0, 0.25), 0 0 24px var(--accent-glow-soft);
+            box-shadow: 0 10px 26px rgba(255, 10, 20, 0.30), 0 0 30px var(--accent-glow-soft);
         }
 
         .features #lnkDoH:active {
@@ -241,7 +242,7 @@ a {
         }
 
 .shadow-screenshot {
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-glow-soft);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 48px var(--accent-glow-soft);
     border: 1px solid var(--border-base);
     border-radius: var(--radius-lg);
     transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
@@ -251,7 +252,7 @@ a {
     .shadow-screenshot:hover {
         transform: scale(1.015);
         border-color: var(--border-strong);
-        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 60px var(--accent-glow-soft);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 70px var(--accent-glow-soft);
     }
 
 .auto-resize-img {

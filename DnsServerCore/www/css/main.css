@@ -1,6 +1,10 @@
 ﻿/*
 Technitium DNS Server - Glassy AMOLED Red/Black Theme v2
 Optimized for performance + expanded component coverage
+
+Theme & UI/UX modifications copyright (C) 2026 Dae Euhwa
+Licensed under the GNU General Public License v3 (or later) as published by
+the Free Software Foundation, consistent with the Technitium DNS Server license.
 */
 
 :root {
@@ -15,15 +19,15 @@ Optimized for performance + expanded component coverage
     --border-strong: rgba(225, 6, 0, 0.40);
     --border-input: rgba(225, 6, 0, 0.30);
 
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 235, 235, 0.74);
+    --text-primary: #fbe9e9;
+    --text-secondary: rgba(255, 220, 220, 0.78);
     --text-muted: rgba(255, 200, 200, 0.50);
 
-    --accent: #e10600;
-    --accent-bright: #ff2d2d;
-    --accent-soft: #ff5a5a;
-    --accent-glow: rgba(225, 6, 0, 0.55);
-    --accent-glow-soft: rgba(225, 6, 0, 0.18);
+    --accent: #ff0a14;
+    --accent-bright: #ff3340;
+    --accent-soft: #ff6a72;
+    --accent-glow: rgba(255, 10, 20, 0.60);
+    --accent-glow-soft: rgba(255, 10, 20, 0.22);
 
     --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.75), 0 0 0 1px var(--border-base) inset;
     --shadow-elevated: 0 10px 32px rgba(225, 6, 0, 0.16), 0 0 0 1px var(--border-strong) inset;
@@ -107,8 +111,9 @@ body {
     margin: 0px !important;
     line-height: 1.42857143 !important;
     background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(225, 6, 0, 0.18), transparent 60%),
-        radial-gradient(900px 500px at 100% 110%, rgba(225, 6, 0, 0.12), transparent 60%),
+        radial-gradient(1400px 700px at 15% -8%, rgba(255, 10, 20, 0.28), transparent 60%),
+        radial-gradient(1100px 600px at 105% 115%, rgba(255, 10, 20, 0.20), transparent 60%),
+        radial-gradient(900px 500px at 50% 50%, rgba(255, 10, 20, 0.05), transparent 70%),
         #000000;
     background-attachment: fixed;
     color-scheme: dark;
@@ -203,12 +208,12 @@ th a, th a:hover {
 
         #header .title img {
             vertical-align: middle;
-            filter: drop-shadow(0 0 6px var(--accent-glow));
+            filter: drop-shadow(0 0 8px rgba(255, 10, 20, 0.65));
             transition: filter var(--t-med), transform var(--t-med);
         }
 
             #header .title img:hover {
-                filter: drop-shadow(0 0 14px var(--accent-bright));
+                filter: drop-shadow(0 0 18px var(--accent-bright));
                 transform: rotate(-6deg) scale(1.08);
             }
 
@@ -217,10 +222,8 @@ th a, th a:hover {
             font-weight: 600;
             letter-spacing: 0.3px;
             margin-left: 10px;
-            background: linear-gradient(180deg, #ffffff 0%, #ffb3b3 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffd0d0;
+            text-shadow: 0 0 16px rgba(255, 10, 20, 0.55), 0 0 4px rgba(255, 30, 40, 0.4);
         }
 
     #header .menu {
@@ -392,13 +395,13 @@ th a, th a:hover {
     }
 
 .panel-heading {
-    background: linear-gradient(180deg, rgba(225, 6, 0, 0.14), rgba(225, 6, 0, 0.04));
+    background: linear-gradient(180deg, rgba(255, 10, 20, 0.34), rgba(180, 4, 0, 0.18));
     border-bottom: 1px solid var(--border-strong);
-    color: var(--text-primary);
+    color: #fbe9e9;
     padding: 14px 18px;
     font-weight: 600;
     letter-spacing: 0.2px;
-    text-shadow: 0 0 12px rgba(225, 6, 0, 0.25);
+    text-shadow: 0 0 14px rgba(255, 10, 20, 0.35);
     position: relative;
     overflow: hidden;
 }
@@ -410,18 +413,18 @@ th a, th a:hover {
         left: -120%;
         width: 50%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.12), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.18), transparent);
         animation: glow-sweep 6s var(--ease-in-out) infinite;
         pointer-events: none;
     }
 
     .panel-heading h1, .panel-heading h2, .panel-heading h3, .panel-heading h4 {
         margin: 0;
-        color: var(--text-primary);
+        color: #fbe9e9;
     }
 
     .panel-heading .panel-title {
-        color: var(--text-primary);
+        color: #fbe9e9;
     }
 
 .panel-body {
@@ -475,7 +478,7 @@ th a, th a:hover {
     background: rgba(15, 4, 4, 0.96);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 18px var(--accent-glow-soft);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 22px var(--accent-glow-soft);
     color: var(--text-primary);
     padding: 6px 0;
     transform-origin: top right;
@@ -510,60 +513,66 @@ th a, th a:hover {
 /* ============= TABS ============= */
 .nav-tabs {
     border-bottom: 1px solid var(--border-strong);
-    background: rgba(15, 4, 4, 0.5);
+    background: linear-gradient(180deg, rgba(255, 10, 20, 0.24), rgba(140, 4, 0, 0.12));
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    padding: 6px 6px 0;
+    padding: 8px 8px 0;
     margin-bottom: 0;
     position: relative;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
     .nav-tabs > li {
         margin-bottom: 0;
+        display: inline-block;
     }
 
         .nav-tabs > li > a {
             color: var(--text-secondary);
             border: 1px solid transparent;
             border-radius: var(--radius) var(--radius) 0 0;
-            padding: 10px 18px;
+            padding: 12px 22px;
             margin-right: 4px;
-            transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+            transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
             position: relative;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
             .nav-tabs > li > a::before {
                 content: "";
                 position: absolute;
-                left: 12px;
-                right: 12px;
+                left: 14px;
+                right: 14px;
                 bottom: 0;
-                height: 2px;
-                background: var(--accent-bright);
-                border-radius: 2px 2px 0 0;
+                height: 3px;
+                background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+                border-radius: 3px 3px 0 0;
                 transform: scaleX(0);
                 transform-origin: center;
                 transition: transform var(--t-med);
-                box-shadow: 0 0 8px var(--accent-bright);
+                box-shadow: 0 0 10px var(--accent-bright);
             }
 
             .nav-tabs > li > a:hover {
                 background: var(--bg-hover);
                 border-color: transparent transparent var(--border-strong);
                 color: var(--accent-bright);
+                transform: translateY(-1px);
             }
 
                 .nav-tabs > li > a:hover::before {
-                    transform: scaleX(0.6);
+                    transform: scaleX(0.7);
                 }
 
         .nav-tabs > li.active > a,
         .nav-tabs > li.active > a:hover,
         .nav-tabs > li.active > a:focus {
-            background: rgba(225, 6, 0, 0.20);
+            background: linear-gradient(180deg, rgba(255, 10, 20, 0.45), rgba(140, 4, 0, 0.22));
             border: 1px solid var(--border-strong);
             border-bottom-color: transparent;
             color: #ffffff;
-            text-shadow: 0 0 12px rgba(225, 6, 0, 0.5);
+            text-shadow: 0 0 14px rgba(255, 10, 20, 0.55);
+            transform: translateY(-1px);
         }
 
             .nav-tabs > li.active > a::before {
@@ -575,13 +584,51 @@ th a, th a:hover {
     border: 1px solid var(--border-base);
     border-top: none;
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    padding: 18px;
+    padding: 22px;
     color: var(--text-primary);
     animation: fade-in 320ms var(--ease-out) both;
 }
 
 .tab-pane {
     animation: fade-in 280ms var(--ease-out) both;
+}
+
+/* ============= SECONDARY TABS (nested inside tab-content) ============= */
+.tab-content .nav-tabs {
+    background: rgba(15, 4, 4, 0.55);
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 6px 6px 0;
+    box-shadow: none;
+    margin-top: -2px;
+}
+
+    .tab-content .nav-tabs > li > a {
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+
+        .tab-content .nav-tabs > li > a::before {
+            height: 2px;
+            left: 10px;
+            right: 10px;
+            box-shadow: 0 0 6px var(--accent-bright);
+        }
+
+    .tab-content .nav-tabs > li.active > a,
+    .tab-content .nav-tabs > li.active > a:hover,
+    .tab-content .nav-tabs > li.active > a:focus {
+        background: rgba(225, 6, 0, 0.22);
+        text-shadow: none;
+    }
+
+.tab-content .tab-content {
+    padding: 14px;
+    border-radius: 0 0 var(--radius) var(--radius);
+    border-top: none;
 }
 
 /* ============= TABLES ============= */
@@ -595,8 +642,8 @@ th a, th a:hover {
 }
 
     .table > thead > tr > th {
-        background: rgba(225, 6, 0, 0.12);
-        color: #ffffff;
+        background: linear-gradient(180deg, rgba(255, 10, 20, 0.40), rgba(180, 4, 0, 0.25));
+        color: #fbe9e9;
         font-weight: 600;
         border-bottom: 2px solid var(--border-strong);
         border-top: 1px solid var(--border-base);
@@ -898,8 +945,8 @@ input[type="datetime-local"] {
 }
 
 .alert-info {
-    border-color: rgba(225, 6, 0, 0.45);
-    background: rgba(40, 12, 12, 0.88);
+    border-color: rgba(255, 10, 20, 0.55);
+    background: rgba(50, 8, 12, 0.88);
 }
 
 .alert-dismissable, .alert-dismissible {
@@ -983,16 +1030,16 @@ input[type="datetime-local"] {
 
 .btn-primary {
     color: #ffffff;
-    background: linear-gradient(180deg, var(--accent-bright) 0%, var(--accent) 100%);
+    background: linear-gradient(180deg, var(--accent-bright) 0%, #d40410 100%);
     border-color: var(--accent);
-    box-shadow: 0 4px 12px var(--accent-glow-soft), 0 0 16px var(--accent-glow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 14px var(--accent-glow-soft), 0 0 20px rgba(255, 30, 40, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
         color: #ffffff;
-        background: linear-gradient(180deg, #ff3a3a 0%, #c40500 100%);
+        background: linear-gradient(180deg, #ff4550 0%, #c00410 100%);
         border-color: var(--accent-bright);
-        box-shadow: 0 8px 22px var(--accent-glow), 0 0 26px var(--accent-glow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+        box-shadow: 0 8px 26px var(--accent-glow), 0 0 32px rgba(255, 30, 40, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
         transform: translateY(-2px);
     }
 
@@ -1123,7 +1170,7 @@ input[type="datetime-local"] {
 }
 
 .modal-header {
-    background: linear-gradient(180deg, rgba(225, 6, 0, 0.18), rgba(225, 6, 0, 0.04));
+    background: linear-gradient(180deg, rgba(255, 10, 20, 0.30), rgba(140, 4, 0, 0.14));
     border-bottom: 1px solid var(--border-strong);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     padding: 16px 20px;
@@ -1138,16 +1185,16 @@ input[type="datetime-local"] {
         left: -120%;
         width: 50%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.12), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.16), transparent);
         animation: glow-sweep 7s var(--ease-in-out) infinite;
         pointer-events: none;
     }
 
     .modal-header .modal-title {
-        color: #ffffff;
+        color: #fbe9e9;
         font-weight: 600;
         letter-spacing: 0.3px;
-        text-shadow: 0 0 14px rgba(225, 6, 0, 0.3);
+        text-shadow: 0 0 14px rgba(255, 10, 20, 0.40);
     }
 
 .modal-body {
@@ -1324,12 +1371,12 @@ kbd {
     float: left;
     width: 0;
     height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+    background: linear-gradient(90deg, #d40410, var(--accent-bright), #ff7a82);
     color: #ffffff;
     text-align: center;
     font-size: 11px;
     line-height: 18px;
-    box-shadow: 0 0 14px var(--accent-glow-soft);
+    box-shadow: 0 0 18px var(--accent-glow-soft);
     transition: width var(--t-slow);
 }
 
@@ -1431,9 +1478,9 @@ kbd {
 }
 
     .stats-panel .total-queries {
-        background: linear-gradient(180deg, rgba(225, 6, 0, 0.85), rgba(140, 4, 0, 0.85));
+        background: linear-gradient(180deg, rgba(255, 30, 40, 0.95), rgba(170, 4, 0, 0.95));
         color: #ffffff;
-        box-shadow: 0 4px 12px var(--accent-glow-soft);
+        box-shadow: 0 4px 14px var(--accent-glow-soft), 0 0 18px rgba(255, 30, 40, 0.30);
     }
 
     .stats-panel .no-error {
@@ -1537,10 +1584,10 @@ kbd {
         float: left;
         padding: 10px 6px;
         margin-right: 0.65%;
-        background: linear-gradient(180deg, rgba(225, 6, 0, 0.85), rgba(140, 4, 0, 0.85));
+        background: linear-gradient(180deg, rgba(255, 30, 40, 0.95), rgba(170, 4, 0, 0.95));
         color: #ffffff;
         border-radius: var(--radius);
-        box-shadow: 0 4px 12px var(--accent-glow-soft);
+        box-shadow: 0 4px 14px var(--accent-glow-soft), 0 0 18px rgba(255, 30, 40, 0.25);
         transition: transform var(--t-fast), box-shadow var(--t-fast), filter var(--t-fast);
         cursor: default;
     }
@@ -1548,7 +1595,7 @@ kbd {
         .zone-stats-panel .stats-item:hover {
             transform: translateY(-3px) scale(1.02);
             filter: brightness(1.12);
-            box-shadow: 0 12px 26px rgba(225, 6, 0, 0.3), 0 0 22px var(--accent-glow-soft);
+            box-shadow: 0 12px 28px rgba(255, 10, 20, 0.35), 0 0 26px rgba(255, 30, 40, 0.35);
         }
 
         .zone-stats-panel .stats-item .number {
