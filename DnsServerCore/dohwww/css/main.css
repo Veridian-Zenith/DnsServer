@@ -14,7 +14,45 @@ Glassy AMOLED Red/Black Theme (matches main app)
     --accent-bright: #ff2d2d;
     --accent-glow-soft: rgba(225, 6, 0, 0.18);
     --blur-amount: 18px;
-    --radius: 10px;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    --radius-pill: 999px;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-fast: 160ms var(--ease-out);
+    --transition-med: 260ms var(--ease-out);
+}
+
+@keyframes ambient-drift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(2%, 1%, 0) scale(1.05); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translate3d(0, 14px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes glow-sweep {
+    0%   { left: -120%; }
+    100% { left: 220%; }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 * {
@@ -43,6 +81,10 @@ html, body {
     border: 3px solid #0a0202;
 }
 
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-bright);
+    }
+
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--accent) #0a0202;
@@ -57,17 +99,31 @@ body {
         #000000;
     background-attachment: fixed;
     color-scheme: dark;
+    overflow-x: hidden;
 }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(600px 400px at 80% 20%, rgba(225, 6, 0, 0.10), transparent 60%),
+            radial-gradient(500px 350px at 10% 90%, rgba(225, 6, 0, 0.08), transparent 60%);
+        animation: ambient-drift 18s var(--ease-in-out) infinite;
+        z-index: -1;
+    }
 
 a {
     color: var(--accent-bright);
     text-decoration: none;
-    transition: color 120ms ease;
+    transition: color var(--transition-fast), text-shadow var(--transition-fast);
 }
 
     a:hover, a:focus {
         color: #ff5757;
         text-decoration: none;
+        text-shadow: 0 0 10px var(--accent-glow-soft);
     }
 
 #content {
@@ -79,6 +135,7 @@ a {
     margin-right: auto;
     padding: 60px 15px 60px 15px;
     word-wrap: break-word;
+    animation: fade-up 700ms var(--ease-out) 100ms both;
 }
 
     .container .pageLogin {
@@ -93,9 +150,22 @@ a {
     }
 
 .features {
-    margin: 80px auto 40px auto;
+    margin: 60px auto 40px auto;
     text-align: center;
+    animation: fade-up 800ms var(--ease-out) 200ms both;
 }
+
+    .features > img {
+        max-width: 64px;
+        border-radius: 14px;
+        filter: drop-shadow(0 0 12px var(--accent-glow-soft));
+        transition: transform var(--transition-med), filter var(--transition-med);
+    }
+
+        .features > img:hover {
+            transform: rotate(-4deg) scale(1.08);
+            filter: drop-shadow(0 0 22px var(--accent-bright));
+        }
 
     .features h1 {
         color: var(--text-primary);
@@ -115,7 +185,22 @@ a {
         color: var(--text-primary);
         margin-top: 40px;
         letter-spacing: 0.3px;
+        position: relative;
+        display: inline-block;
+        padding: 0 18px;
     }
+
+        .features h3::before, .features h3::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+        }
+
+        .features h3::before { right: 100%; }
+        .features h3::after  { left: 100%; }
 
     .features p {
         color: var(--text-secondary);
@@ -130,28 +215,69 @@ a {
 
     .features #lnkDoH {
         display: inline-block;
-        padding: 8px 16px;
+        padding: 12px 22px;
         background: rgba(225, 6, 0, 0.12);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px) saturate(150%);
+        -webkit-backdrop-filter: blur(10px) saturate(150%);
         border: 1px solid var(--border-strong);
-        border-radius: 6px;
+        border-radius: var(--radius);
         color: var(--accent-bright) !important;
         font-weight: 600;
         word-break: break-all;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        transition:
+            transform var(--transition-fast),
+            background var(--transition-fast),
+            box-shadow var(--transition-fast),
+            color var(--transition-fast);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 14px var(--accent-glow-soft);
     }
+
+        .features #lnkDoH::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.20), transparent);
+            animation: glow-sweep 4s var(--ease-in-out) infinite;
+            pointer-events: none;
+        }
 
         .features #lnkDoH:hover {
             background: rgba(225, 6, 0, 0.25);
             color: #ff5757 !important;
             text-decoration: none;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow:
+                0 10px 28px rgba(225, 6, 0, 0.25),
+                0 0 26px var(--accent-glow-soft);
+        }
+
+        .features #lnkDoH:active {
+            transform: translateY(0) scale(0.99);
         }
 
 .shadow-screenshot {
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-glow-soft);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.8),
+        0 0 40px var(--accent-glow-soft);
     border: 1px solid var(--border-base);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+    animation: fade-up 800ms var(--ease-out) 400ms both;
 }
+
+    .shadow-screenshot:hover {
+        transform: scale(1.015);
+        border-color: var(--border-strong);
+        box-shadow:
+            0 24px 64px rgba(0, 0, 0, 0.85),
+            0 0 60px var(--accent-glow-soft);
+    }
 
 .auto-resize-img {
     max-width: 100%;
