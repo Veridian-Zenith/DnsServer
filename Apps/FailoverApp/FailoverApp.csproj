@@ -24,25 +24,7 @@
 		</ProjectReference>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="TechnitiumLibrary">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="TechnitiumLibrary.IO">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.IO.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="TechnitiumLibrary.Net">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.Net.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="TechnitiumLibrary.Net.Mail">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.Net.Mail.dll</HintPath>
-			<Private>true</Private>
-		</Reference>
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<None Update="dnsApp.config">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -52,4 +34,10 @@
 		</None>
 	</ItemGroup>
 
+<ItemGroup>
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary\TechnitiumLibrary.csproj" />
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary.IO\TechnitiumLibrary.IO.csproj" />
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary.Net\TechnitiumLibrary.Net.csproj" />
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary.Net.Mail\TechnitiumLibrary.Net.Mail.csproj" />
+</ItemGroup>
 </Project>

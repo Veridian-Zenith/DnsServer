@@ -24,13 +24,7 @@
 		</ProjectReference>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="TechnitiumLibrary.Net">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.Net.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<None Update="dnsApp.config">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -40,4 +34,9 @@
 		</None>
 	</ItemGroup>
 
+<ItemGroup>
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary.Net\TechnitiumLibrary.Net.csproj" />
+</ItemGroup>
+<ItemGroup>
+</ItemGroup>
 </Project>

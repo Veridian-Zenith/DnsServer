@@ -24,17 +24,7 @@
 		</ProjectReference>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="TechnitiumLibrary">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="TechnitiumLibrary.Net">
-			<HintPath>..\..\..\TechnitiumLibrary\bin\TechnitiumLibrary.Net.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<None Update="adguard-upstreams.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -47,4 +37,8 @@
 		</None>
 	</ItemGroup>
 
+<ItemGroup>
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary\TechnitiumLibrary.csproj" />
+<ProjectReference Include="..\..\..\TechnitiumLibrary\TechnitiumLibrary.Net\TechnitiumLibrary.Net.csproj" />
+</ItemGroup>
 </Project>

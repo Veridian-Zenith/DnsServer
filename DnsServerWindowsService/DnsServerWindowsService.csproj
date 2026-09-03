@@ -20,12 +20,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<Reference Include="TechnitiumLibrary.Net.Firewall">
-			<HintPath>..\..\TechnitiumLibrary\bin\TechnitiumLibrary.Net.Firewall.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.9" />
 	</ItemGroup>
@@ -38,4 +33,7 @@
 		<Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 
+<ItemGroup>
+<ProjectReference Include="..\..\TechnitiumLibrary\TechnitiumLibrary.Net.Firewall\TechnitiumLibrary.Net.Firewall.csproj" />
+</ItemGroup>
 </Project>

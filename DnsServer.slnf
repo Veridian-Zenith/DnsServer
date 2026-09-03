@@ -29,8 +29,6 @@
       "Apps/DefaultRecordsApp/DefaultRecordsApp.csproj",
       "Apps/DnsRebindingProtectionApp/DnsRebindingProtectionApp.csproj",
       "Apps/FilterAaaaApp/FilterAaaaApp.csproj",
-      "Apps/QueryLogsSqlServerApp/QueryLogsSqlServerApp.csproj",
-      "Apps/QueryLogsMySqlApp/QueryLogsMySqlApp.csproj",
       "DnsServerCore.HttpApi/DnsServerCore.HttpApi.csproj",
       "Apps/QueryLogsPostgreSqlApp/QueryLogsPostgreSqlApp.csproj"
     ]
