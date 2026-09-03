@@ -53,6 +53,8 @@ namespace QueryLogsPostgreSql
 
         NpgsqlDataSource _dataSource = null!;
 
+        bool _clientIpIsInet;
+
         Channel<LogEntry>? _channel;
         ChannelWriter<LogEntry>? _channelWriter;
         Thread? _consumerThread;
@@ -254,7 +256,9 @@ namespace QueryLogsPostgreSql
 
                             NpgsqlParameter paramServer = command.Parameters.Add("@server" + i, NpgsqlDbType.Varchar);
                             NpgsqlParameter paramTimestamp = command.Parameters.Add("@timestamp" + i, NpgsqlDbType.TimestampTz);
-                            NpgsqlParameter paramClientIp = command.Parameters.Add("@client_ip" + i, NpgsqlDbType.Varchar);
+                            NpgsqlParameter paramClientIp = _clientIpIsInet
+                                ? command.Parameters.Add("@client_ip" + i, NpgsqlDbType.Inet)
+                                : command.Parameters.Add("@client_ip" + i, NpgsqlDbType.Varchar);
                             NpgsqlParameter paramProtocol = command.Parameters.Add("@protocol" + i, NpgsqlDbType.Smallint);
                             NpgsqlParameter paramResponseType = command.Parameters.Add("@response_type" + i, NpgsqlDbType.Smallint);
                             NpgsqlParameter paramResponseRtt = command.Parameters.Add("@response_rtt" + i, NpgsqlDbType.Double);
@@ -266,7 +270,7 @@ namespace QueryLogsPostgreSql
 
                             paramServer.Value = _dnsServer?.ServerDomain;
                             paramTimestamp.Value = log.Timestamp;
-                            paramClientIp.Value = log.RemoteEP.Address.ToString();
+                            paramClientIp.Value = log.RemoteEP.Address;
                             paramProtocol.Value = (byte)log.Protocol;
 
                             DnsServerResponseType responseType;
@@ -382,6 +386,23 @@ namespace QueryLogsPostgreSql
                     {
                         await using (NpgsqlConnection connection = await _dataSource.OpenConnectionAsync())
                         {
+                            //detect whether the dns_logs.client_ip column is the native 'inet' type
+                            //(some users pre-create the table with inet instead of varchar; we need
+                            //to bind/read using IPAddress rather than string in that case)
+                            await using (NpgsqlCommand command = connection.CreateCommand())
+                            {
+                                command.CommandText = @"
+SELECT data_type
+FROM information_schema.columns
+WHERE table_schema = current_schema()
+  AND table_name = 'dns_logs'
+  AND column_name = 'client_ip';";
+
+                                object? result = await command.ExecuteScalarAsync();
+                                _clientIpIsInet = result is string s &&
+                                    string.Equals(s, "inet", StringComparison.OrdinalIgnoreCase);
+                            }
+
                             await using (NpgsqlCommand command = connection.CreateCommand())
                             {
                                 command.CommandText = @$"
@@ -753,7 +774,11 @@ CREATE TABLE IF NOT EXISTS dns_logs
                         command.Parameters.AddWithValue("@end", end);
 
                     if (clientIpAddress is not null)
-                        command.Parameters.AddWithValue("@client_ip", clientIpAddress.ToString());
+                    {
+                        command.Parameters.Add(_clientIpIsInet
+                            ? new NpgsqlParameter("@client_ip", NpgsqlDbType.Inet) { Value = clientIpAddress }
+                            : new NpgsqlParameter("@client_ip", NpgsqlDbType.Varchar) { Value = clientIpAddress.ToString() });
+                    }
 
                     if (protocol is not null)
                         command.Parameters.AddWithValue("@protocol", (byte)protocol);
@@ -818,7 +843,11 @@ LIMIT @limit OFFSET @offset";
                         command.Parameters.AddWithValue("@end", end);
 
                     if (clientIpAddress is not null)
-                        command.Parameters.AddWithValue("@client_ip", clientIpAddress.ToString());
+                    {
+                        command.Parameters.Add(_clientIpIsInet
+                            ? new NpgsqlParameter("@client_ip", NpgsqlDbType.Inet) { Value = clientIpAddress }
+                            : new NpgsqlParameter("@client_ip", NpgsqlDbType.Varchar) { Value = clientIpAddress.ToString() });
+                    }
 
                     if (protocol is not null)
                         command.Parameters.AddWithValue("@protocol", (byte)protocol);
@@ -865,7 +894,14 @@ LIMIT @limit OFFSET @offset";
                             else
                                 answer = reader.GetString(10);
 
-                            entries.Add(new DnsLogEntry(rowNumber, reader.GetDateTime(1), IPAddress.Parse(reader.GetString(2)), (DnsTransportProtocol)reader.GetByte(3), (DnsServerResponseType)reader.GetByte(4), responseRtt, (DnsResponseCode)reader.GetByte(6), question, answer));
+                            //client_ip may be stored as inet or varchar depending on user schema
+                            IPAddress clientIp = reader.IsDBNull(2)
+                                ? IPAddress.None
+                                : (reader.GetFieldType(2) == typeof(IPAddress)
+                                    ? reader.GetFieldValue<IPAddress>(2)
+                                    : IPAddress.Parse(reader.GetString(2)));
+
+                            entries.Add(new DnsLogEntry(rowNumber, reader.GetDateTime(1), clientIp, (DnsTransportProtocol)reader.GetByte(3), (DnsServerResponseType)reader.GetByte(4), responseRtt, (DnsResponseCode)reader.GetByte(6), question, answer));
 
                             if (descendingOrder)
                                 rowNumber--;

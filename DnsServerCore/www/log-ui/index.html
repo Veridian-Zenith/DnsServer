@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Technitium DNS Log Viewer</title>
+<link rel="stylesheet" href="../../www/css/bootstrap.min.css" />
+<style>
+:root {
+    --bg-base: #000000;
+    --bg-card: rgba(20, 8, 8, 0.65);
+    --border-base: rgba(225, 6, 0, 0.18);
+    --text-body: #fbe9e9;
+    --text-muted: rgba(255, 200, 200, 0.52);
+    --accent: #ff0a14;
+    --accent-glow: rgba(255, 10, 20, 0.30);
+    --radius: 12px;
+    --t-fast: 160ms ease-out;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; padding: 0; background: var(--bg-base); color: var(--text-body); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; min-height: 100vh; font-size: 14px; line-height: 1.5; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: linear-gradient(180deg, rgba(255, 10, 20, 0.30), rgba(20, 8, 8, 0.80)); border-bottom: 1px solid var(--border-base); }
+.header-bar h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: 0.3px; text-shadow: 0 0 14px rgba(255, 10, 20, 0.45); }
+.header-bar .actions { display: inline-flex; gap: 6px; align-items: center; }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.card { background: var(--bg-card); border: 1px solid var(--border-base); border-radius: var(--radius); overflow: hidden; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.60); }
+.card-header { background: linear-gradient(180deg, rgba(255, 10, 20, 0.34), rgba(140, 4, 0, 0.14)); border-bottom: 1px solid var(--border-base); padding: 14px 18px; font-weight: 600; color: #fbe9e9; letter-spacing: 0.2px; text-shadow: 0 0 14px rgba(255, 10, 20, 0.30); }
+.card-body { padding: 16px; }
+.form-inline { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding: 14px 18px; background: rgba(15, 4, 4, 0.4); border-bottom: 1px solid var(--border-base); }
+.form-inline .form-group { margin: 0; flex: 0 0 auto; }
+.form-inline .form-group.flex-grow { flex: 1 1 220px; min-width: 220px; }
+.form-inline label { font-size: 12px; color: var(--text-muted); margin-right: 6px; }
+.form-inline input, .form-inline select { height: 34px; font-size: 13px; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255, 10, 20, 0.30); background: rgba(8, 2, 2, 0.65); color: var(--text-body); transition: border-color var(--t-fast), box-shadow var(--t-fast); }
+.form-inline input:focus, .form-inline select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 10, 20, 0.15); outline: none; }
+.btn { display: inline-block; padding: 6px 14px; border: 1px solid transparent; border-radius: 8px; text-decoration: none; font-weight: 500; transition: all var(--t-fast); cursor: pointer; background: linear-gradient(180deg, #ff3340 0%, #d40410 100%); color: #fff; box-shadow: 0 4px 14px rgba(255, 10, 20, 0.22); }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255, 10, 20, 0.30); }
+.btn-default { background: rgba(40, 12, 12, 0.60); border: 1px solid rgba(255, 10, 20, 0.30); }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table thead th { background: linear-gradient(180deg, rgba(255, 10, 20, 0.35), rgba(140, 4, 0, 0.20)); color: #fbe9e9; padding: 10px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 2px solid rgba(255, 10, 20, 0.35); }
+.table tbody td { padding: 10px 12px; border-top: 1px solid rgba(255, 255, 255, 0.06); vertical-align: top; }
+.table tbody tr:hover { background: rgba(255, 10, 20, 0.08); }
+.table tbody tr.info-row td { background: rgba(255, 255, 255, 0.015); }
+.table tbody tr.warn-row td { background: rgba(217, 119, 0, 0.10); border-left: 3px solid rgba(217, 119, 0, 0.45); }
+.table tbody tr.error-row td { background: rgba(255, 10, 20, 0.10); border-left: 3px solid var(--accent); }
+.file-row { padding: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); transition: background var(--t-fast); }
+.file-row:hover { background: rgba(255, 255, 255, 0.04); padding-left: 10px; }
+.file-row a { color: #fbe9e9; text-decoration: none; word-break: break-all; }
+.file-row a:hover { color: #ff5a5a; text-decoration: underline; }
+.file-size { color: rgba(255, 255, 255, 0.50); font-size: 11px; margin-left: 6px; }
+.log-msg { font-size: 13px; line-height: 1.5; color: #fbe9e9; word-break: break-word; }
+.log-ts { font-family: ui-monospace, "SF Mono", Menlo, Monaco, monospace; font-size: 12px; color: rgba(255, 255, 255, 0.50); white-space: nowrap; letter-spacing: 0.2px; }
+.log-badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 4px; }
+.log-badge--info { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.70); border: 1px solid rgba(255, 255, 255, 0.15); }
+.log-badge--warn { background: rgba(217, 119, 0, 0.22); color: #ffd58a; border: 1px solid rgba(217, 119, 0, 0.45); }
+.log-badge--error { background: rgba(255, 10, 20, 0.25); color: #ffb3b3; border: 1px solid rgba(255, 10, 20, 0.55); box-shadow: 0 0 8px rgba(255, 10, 20, 0.15); }
+.log-stack { margin-top: 8px; padding: 10px 14px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 8px; font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 11px; color: rgba(255, 255, 255, 0.65); white-space: pre-wrap; word-break: break-all; max-height: 240px; overflow-y: auto; }
+.log-empty-state { text-align: center; color: rgba(255, 255, 255, 0.40); padding: 60px; font-style: italic; font-size: 16px; }
+.log-truncated-note { background: rgba(217, 119, 0, 0.12); border: 1px solid rgba(217, 119, 0, 0.35); color: #ffd58a; padding: 8px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 10px; }
+.log-content { max-height: 72vh; overflow-y: auto; padding: 4px; }
+</style>
+</head>
+<body>
+<div class="header-bar">
+    <h2>DNS Log Viewer</h2>
+    <div class="actions">
+        <button onclick="clearFilter()" class="btn btn-default btn-sm">Clear filter</button>
+        <button onclick="downloadLogFile()" class="btn btn-sm">Download</button>
+    </div>
+</div>
+<div class="container">
+    <div class="form-inline" style="margin-bottom: 12px;">
+        <div class="form-group flex-grow">
+            <input type="text" id="txtQuickFilter" class="form-control" placeholder="Filter logs (matches message, timestamp, exception type)..." />
+        </div>
+        <div class="form-group">
+            <label>Show:</label>
+            <select id="optFilterLevel" class="form-control" onchange="applyFilter();">
+                <option value="all">All</option>
+                <option value="info">Info only</option>
+                <option value="warn">Warn &amp; up</option>
+                <option value="error">Errors only</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="logContent" class="card" style="margin-bottom: 0;">
+        <div class="card-header">Log Entries</div>
+        <div class="card-body" id="logBody" style="padding: 8px;">
+            <div id="logLoader">Loading...</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1633,7 +1633,9 @@ kbd {
 
 .log-list-pane {
     float: left;
-    width: 17%;
+    width: 22%;
+    margin-right: 1%;
+    box-sizing: border-box;
 }
 
 .logs {
@@ -1646,12 +1648,253 @@ kbd {
 
 .log-viewer-pane {
     float: right;
-    width: 82%;
+    width: 77%;
+    box-sizing: border-box;
+}
+
+.log-viewer-pane-hidden {
     display: none;
+}
+
+#logsTabPaneLogViewer::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .query-logs tr:hover {
     background: var(--bg-hover);
+}
+
+/* ============= LOG VIEWER (simplified) ============= */
+.log-list-pane {
+    float: left;
+    width: 22%;
+    margin-right: 1%;
+    box-sizing: border-box;
+}
+
+.log-viewer-pane {
+    float: right;
+    width: 77%;
+    box-sizing: border-box;
+}
+
+.log-viewer-pane-hidden {
+    display: none;
+}
+
+#logsTabPaneLogViewer::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* File list (left pane) */
+.log-list-pane .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.log-pane-footer {
+    padding: 8px 10px;
+    border-top: 1px solid var(--border-base);
+    background: rgba(15, 4, 4, 0.5);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.log-file-row {
+    padding: 6px 4px;
+    border-bottom: 1px solid var(--border-base);
+    transition: background var(--t-fast), padding-left var(--t-fast);
+}
+
+.log-file-row:last-child {
+    border-bottom: none;
+}
+
+.log-file-row:hover {
+    background: var(--bg-hover);
+    padding-left: 8px;
+}
+
+.log-file-row a {
+    color: var(--text-primary);
+    display: inline-block;
+    word-break: break-all;
+}
+
+.log-file-row a:hover {
+    color: var(--accent-bright);
+    text-decoration: none;
+}
+
+.log-file-size {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+.log-empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px;
+    font-style: italic;
+}
+
+/* Viewer (right pane) */
+.log-viewer-pane .panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.log-viewer-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #fbe9e9;
+    word-break: break-all;
+}
+
+.log-viewer-actions {
+    margin-left: auto;
+    display: inline-flex;
+    gap: 6px;
+}
+
+/* Log content (each entry) */
+.log-content {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.log-entry {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-base);
+    font-size: 13px;
+    line-height: 1.5;
+    transition: background var(--t-fast);
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-entry .log-ts {
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-right: 8px;
+    letter-spacing: 0.2px;
+}
+
+.log-entry .log-tz {
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+.log-entry .log-badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.log-entry .log-msg {
+    margin-top: 4px;
+    word-break: break-word;
+    color: var(--text-primary);
+}
+
+.log-entry .log-stack {
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius-sm);
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.log-exc-type {
+    font-weight: 700;
+    color: var(--accent-bright);
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+/* Level coloring */
+.log-line--info {
+    background: rgba(255, 255, 255, 0.02);
+}
+.log-line--info .log-badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-base);
+}
+
+.log-line--warn {
+    background: rgba(217, 119, 0, 0.08);
+    border-left: 3px solid rgba(217, 119, 0, 0.5);
+}
+.log-line--warn .log-badge {
+    background: rgba(217, 119, 0, 0.25);
+    color: #ffd58a;
+    border: 1px solid rgba(217, 119, 0, 0.45);
+}
+
+.log-line--error {
+    background: rgba(255, 10, 20, 0.08);
+    border-left: 3px solid var(--accent-bright);
+}
+.log-line--error .log-badge {
+    background: rgba(255, 10, 20, 0.25);
+    color: #ffb3b3;
+    border: 1px solid rgba(255, 10, 20, 0.55);
+    box-shadow: 0 0 8px rgba(255, 10, 20, 0.25);
+}
+
+.log-line--warn:hover,
+.log-line--error:hover {
+    filter: brightness(1.15);
+}
+
+/* Quick filter input */
+.log-quick-filter {
+    background: rgba(15, 4, 4, 0.5);
+    border: 1px solid var(--border-input);
+}
+
+/* Loading state inside the viewer */
+.log-viewer-loader {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+}
+
+/* Truncation notice */
+.log-truncated-note {
+    background: rgba(217, 119, 0, 0.10);
+    border: 1px solid rgba(217, 119, 0, 0.30);
+    color: #ffd58a;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 /* ============= ABOUT ============= */

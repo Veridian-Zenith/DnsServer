@@ -108,6 +108,13 @@ function logsClusterNodeChanged() {
     }
 }
 
+function refreshLogsTab() {
+    if ($("#logsTabListLogViewer").hasClass("active"))
+        refreshLogFilesList();
+    else if ($("#logsTabListQueryLogs").hasClass("active"))
+        refreshQueryLogsTab();
+}
+
 function refreshLogFilesList(selectedFileName) {
     var lstLogFiles = $("#lstLogFiles");
 
@@ -170,7 +177,7 @@ function viewLog(logFile) {
     divLogViewer.show();
 
     HTTPRequest({
-        url: "api/logs/download?fileName=" + encodeURIComponent(logFile) + "&limit=2" + "&node=" + encodeURIComponent(node),
+        url: "api/logs/download?fileName=" + encodeURIComponent(logFile) + "&limit=0" + "&node=" + encodeURIComponent(node),
         token: sessionData.token,
         isTextResponse: true,
         success: function (response) {
